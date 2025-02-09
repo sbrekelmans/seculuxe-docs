@@ -4,9 +4,9 @@
 
 ## Identifier Options
 
+* [Options](identifier-options/options.md)
 * [UUIDs](identifier-options/uuids.md)
 * [Compact IDs](identifier-options/uids.md)
-* [Options](identifier-options/options.md)
 
 ## QR Codes
 
