@@ -1,4 +1,4 @@
-# ID Generation Guide (No Station ID)
+# ID Generation Guide
 
 This guide explains how to generate a **compact, collision-resistant ID** for high-volume item marking (e.g., diamonds), **without** including a “station ID.” Instead, we use:
 
@@ -119,3 +119,30 @@ const hexString = Array.from(idBytes)
   .join("");
 console.log("Hex:", hexString); 
 // e.g., "0063b90de0"
+```
+
+## 6. Concrete Example Calculation
+Let’s walk through an example when you call generateCompactId():
+
+Assume the current date is 2025-01-15T12:00:00Z.
+dayOffset = 14 (days since 2025-01-01)
+randomVal = 1,234,567 (0x12D687 in hex)
+In binary:
+
+dayOffset = 14 → 0000000000001110 (14 bits)
+randomVal = 1234567 decimal ~ 000100101101011010000111 (24 bits)
+Concatenate:
+
+
+```ts
+Day Offset (14 bits):  0000000000001110
+Random (24 bits):      000100101101011010000111
+---------------------------------------------
+Total (38 bits):       0000000000001110000100101101011010000111
+
+```
+
+That’s 38 bits. In big-endian bytes:
+Byte 0 might capture the top 2 bits (unused) plus next 6 bits of day offset, etc.
+The resulting 5 bytes might be [0x00, 0x0E, 0x12, 0xD6, 0x87] (for illustration).
+In hex → "000e12d687".
