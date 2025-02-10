@@ -29,21 +29,26 @@ A key principle here is that **ID generation should be possible in a completely 
 
 ## Comparison Table
 
-| **Aspect**         | **UUID v4**                                             | **Compact ID**                                                   |
-| ------------------ | ------------------------------------------------------- | ---------------------------------------------------------------- |
-| **Bit Length**     | 128 bits (16 bytes)                                     | \~38 bits (5 bytes, 2 bits unused)                               |
-| **Typical String** | 36 chars (hyphenated hex)                               | 10 chars hex (if you convert the 5 bytes to hex)                 |
-| **Collision Risk** | Astronomically low (far below 1 in 10^18 for many uses) | Extremely low for millions/day (24-bit random is 1 in 16.7M/day) |
-| **Time Element**   | None (pure random)                                      | 14-bit “day offset” for chronological component                  |
-| **Ease of Use**    | Universally recognized format (libraries everywhere)    | Small snippet of code, custom but straightforward                |
-| **Barcode Size**   | Larger (128 bits → more modules in 2D code)             | Smaller (38 bits → fewer modules)                                |
-| **Recognition**    | Standard in many ecosystems, widely known               | Custom format; simpler scanning once documented                  |
+| **Aspect**             | **UUID v4**                                                                         | **Compact ID**                                                   |
+| ---------------------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| **Bit Length**         | 128 bits (16 bytes)                                                                 | \~38 bits (5 bytes, 2 bits unused)                               |
+| **Typical String**     | 36 chars (hyphenated hex)                                                           | 10 chars hex (if you convert the 5 bytes to hex)                 |
+| **Collision Risk**     | Astronomically low (far below 1 in 10^18 for many uses)                             | Extremely low for millions/day (24-bit random is 1 in 16.7M/day) |
+| **Time Element**       | None (pure random)                                                                  | 14-bit “day offset” for chronological component                  |
+| **Ease of Use**        | Universally recognized format (libraries everywhere)                                | Small snippet of code, custom but straightforward                |
+| **Barcode Size**       | Larger (128 bits → more modules in 2D code)                                         | Smaller (38 bits → fewer modules)                                |
+| **Recognition**        | Standard in many ecosystems, widely known                                           | Custom format; simpler scanning once documented                  |
+| **Dotcode Example**    | ![](../.gitbook/assets/dotcode-ba9ec44be71946a29430d37b2692b7d0.png)wxh: 37x24 dots | ![](../.gitbook/assets/dotcode-abcde123.png)wxh: 21x14 dots      |
+| **Datamatrix Example** | ![](../.gitbook/assets/datamatrix-ba9ec44be71946a29430d37b2692b7d0.png)wxh: 22x22   | ![](../.gitbook/assets/datamatrix-abcde123.png)wxh: 14x14        |
+
+
 
 ### Which to Choose?
 
 * If you need a **universally recognized** format, and **storage or code size** isn’t a big concern, **UUID v4** is easiest (tons of libraries, no custom logic).
 * If you must fit into **tiny 2D codes** (e.g., marking physical items with minimal space), the **compact ID** drastically reduces overhead.
 * Both preserve the principle of **decentralized** ID generation with minimal collision risk.
+* The optimal choice allows maximum entropy within a code that can be printed without repositioning.&#x20;
 
 For more details on each approach, see:
 
