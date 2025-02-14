@@ -1,6 +1,6 @@
 # Options
 
-When marking items (e.g., diamonds) that require **unique identifiers**, there are many ways to generate IDs along a **spectrum** of complexity and size. Below, we highlight **two examples** at different points on that spectrum:
+wxWhen marking items (e.g., diamonds) that require **unique identifiers**, there are many ways to generate IDs along a **spectrum** of complexity and size. Below, we highlight **two examples** at different points on that spectrum:
 
 1. **Full UUID (v4)**
    * **128 bits** of random data, typically serialized as a 36-character string (e.g., `123e4567-e89b-12d3-a456-426614174000`).
@@ -27,19 +27,33 @@ A key principle here is that **ID generation should be possible in a completely 
 
 ***
 
-## Comparison Table
+## Comparison Table - hex
 
-| **Aspect**             | **UUID v4**                                                                         | **Compact ID**                                                   |
-| ---------------------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| **Bit Length**         | 128 bits (16 bytes)                                                                 | \~38 bits (5 bytes, 2 bits unused)                               |
-| **Typical String**     | 36 chars (hyphenated hex)                                                           | 10 chars hex (if you convert the 5 bytes to hex)                 |
-| **Collision Risk**     | Astronomically low (far below 1 in 10^18 for many uses)                             | Extremely low for millions/day (24-bit random is 1 in 16.7M/day) |
-| **Time Element**       | None (pure random)                                                                  | 14-bit “day offset” for chronological component                  |
-| **Ease of Use**        | Universally recognized format (libraries everywhere)                                | Small snippet of code, custom but straightforward                |
-| **Barcode Size**       | Larger (128 bits → more modules in 2D code)                                         | Smaller (38 bits → fewer modules)                                |
-| **Recognition**        | Standard in many ecosystems, widely known                                           | Custom format; simpler scanning once documented                  |
-| **Dotcode Example**    | ![](../.gitbook/assets/dotcode-ba9ec44be71946a29430d37b2692b7d0.png)wxh: 37x24 dots | ![](../.gitbook/assets/dotcode-abcde123.png)wxh: 21x14 dots      |
-| **Datamatrix Example** | ![](../.gitbook/assets/datamatrix-ba9ec44be71946a29430d37b2692b7d0.png)wxh: 22x22   | ![](../.gitbook/assets/datamatrix-abcde123.png)wxh: 14x14        |
+| Aspect                 | UUID v4                                                                           | Compact ID                                                       |
+| ---------------------- | --------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| **Bit Length**         | 128 bits (16 bytes)                                                               | \~38 bits (5 bytes, 2 bits unused)                               |
+| **Typical String**     | 36 chars (hyphenated hex)                                                         | 10 chars hex (if you convert the 5 bytes to hex)                 |
+| **Collision Risk**     | Astronomically low (far below 1 in 10^18 for many uses)                           | Extremely low for millions/day (24-bit random is 1 in 16.7M/day) |
+| **Time Element**       | None (pure random)                                                                | 14-bit “day offset” for chronological component                  |
+| **Ease of Use**        | Universally recognized format (libraries everywhere)                              | Small snippet of code, custom but straightforward                |
+| **Barcode Size**       | Larger (128 bits → more modules in 2D code)                                       | Smaller (38 bits → fewer modules)                                |
+| **Recognition**        | Standard in many ecosystems, widely known                                         | Custom format; simpler scanning once documented                  |
+| **ID Example**         | 8fc60e7c-3b3c-48e9-a6a7-a5fe4f1fbc31                                              | abcd1234                                                         |
+| **Datamatrix Example** | ![](../.gitbook/assets/datamatrix-ba9ec44be71946a29430d37b2692b7d0.png)wxh: 22x22 | ![](../.gitbook/assets/datamatrix-abcde123.png)wxh: 14x14        |
+
+## Comparison Table - Base62
+
+<table><thead><tr><th width="233">Aspect</th><th>UUID v4</th><th>Custom Base62</th></tr></thead><tbody><tr><td><strong>Bit Length</strong></td><td>128 bits (16 bytes)</td><td>approximately 60 bits</td></tr><tr><td><strong>Typical String</strong></td><td>22 chars</td><td>18 Chars</td></tr><tr><td><strong>Collision Risk</strong></td><td>Astronomically low (far below 1 in 10^18 for many uses)</td><td>Extremely low if time element is added</td></tr><tr><td><strong>Time Element</strong></td><td>None (pure random)</td><td>None (should add though)</td></tr><tr><td><strong>Ease of Use</strong></td><td>Universally recognized format (libraries everywhere)</td><td>Small snippet of code, custom but straightforward</td></tr><tr><td><strong>Barcode Size</strong></td><td>Larger (128 bits → more modules in 2D code) </td><td>Smaller (60 bits → fewer modules)</td></tr><tr><td><strong>Recognition</strong></td><td>Standard in many ecosystems, widely known</td><td>Custom format; simpler scanning once documented</td></tr><tr><td><strong>ID Example</strong></td><td>2fNwVYePN8WqqDFvVf7XMN</td><td>2fNwVYePN8WqqDFvVf</td></tr><tr><td><strong>Datamatrix Example</strong></td><td><img src="../.gitbook/assets/image.png" alt="" data-size="original">wxh: 20x20</td><td><img src="../.gitbook/assets/image (1).png" alt="" data-size="original">wxh: 18x18</td></tr></tbody></table>
+
+| String size | Datamatrix size |
+| ----------- | --------------- |
+| 22-43       | 22x22           |
+| 19-21       | 20x20           |
+| 12-18       | 18x18           |
+| 9-11        | 16x16           |
+| 6-8         | 14x14           |
+| 4-5         | 12x12           |
+| < 4         | 10x10           |
 
 
 
