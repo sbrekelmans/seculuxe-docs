@@ -12,3 +12,7 @@
 
 * [DataMatrix](qr-codes/datamatrix.md)
 * [Generating a DotCode (compact)](qr-codes/dotcode.md)
+
+## Development
+
+* [Seculuxe API](development/seculuxe-api.md)
